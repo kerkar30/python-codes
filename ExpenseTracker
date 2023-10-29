@@ -1,0 +1,55 @@
+#This is an ExpenseTracker program without GUI
+
+class ExpenseTracker:
+    def __init__(self):
+        # Initialize the expense tracker with an initial balance of 0 and an empty list of transactions.
+        self.balance = 0
+        self.transactions = []
+
+    def add_expense(self, amount, description):
+        # Add an expense to the tracker. Update the balance and record the transaction.
+        self.transactions.append((amount, description))
+        self.balance += amount
+
+    def view_transactions(self):
+        # Display a list of all recorded transactions with dates, amounts, and descriptions.
+        if not self.transactions:
+            print("No transactions yet.")
+        else:
+            print("Date       | Amount  | Description")
+            print("-" * 40)
+            for amount, description in self.transactions:
+                print(f"{description:10} | {amount:7.2f} | {description}")
+
+    def view_balance(self):
+        # Display the current balance.
+        print(f"Current Balance: ${self.balance:.2f}")
+
+    def main_menu(self):
+        while True:
+            print("\nExpense Tracker")
+            print("1. Add Expense")
+            print("2. View Transactions")
+            print("3. View Balance")
+            print("4. Quit")
+
+            choice = input("Enter your choice: ")
+
+            if choice == "1":
+                amount = float(input("Enter the expense amount: "))
+                description = input("Enter a description: ")
+                self.add_expense(amount, description)
+                print("Expense added.")
+            elif choice == "2":
+                self.view_transactions()
+            elif choice == "3":
+                self.view_balance()
+            elif choice == "4":
+                print("Goodbye!")
+                break
+            else:
+                print("Invalid choice. Please try again.")
+
+if __name__ == "__main__":
+    tracker = ExpenseTracker()
+    tracker.main_menu()
